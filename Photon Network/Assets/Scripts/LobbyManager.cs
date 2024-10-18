@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
     [SerializeField] Canvas lobbyCanvas;
+    [SerializeField] Dropdown dropdown;
     private void Awake()
     {
         if(PhotonNetwork.IsConnected)
@@ -39,7 +40,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         (
             new TypedLobby
             (
-                "Default",
+                dropdown.options[dropdown.value].text,
                 LobbyType.Default
             )
 
