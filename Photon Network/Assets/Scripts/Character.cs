@@ -10,6 +10,7 @@ public class Character : MonoBehaviourPunCallbacks
 {
     [SerializeField] Camera remoteCamera;
     [SerializeField] Rotation rotation;
+    [SerializeField] Rigidbody rigidBody;
     Move move;
     // Start is called before the first frame update
     private void Awake()
@@ -17,6 +18,8 @@ public class Character : MonoBehaviourPunCallbacks
         move = GetComponent<Move>();
 
         rotation = GetComponent<Rotation>();
+
+        rigidBody = GetComponent<Rigidbody>();
     }
     void Start()
     {
@@ -25,9 +28,12 @@ public class Character : MonoBehaviourPunCallbacks
 
     void Update()
     {
-        move.Movement();
-
-        rotation.RotateY();
+        rotation.InputUpdateY();
+    }
+    private void FixedUpdate()
+    {
+        rotation.RotateY(rigidBody);
+        move.Movement(rigidBody);
     }
     public void DisableCamera()
     {

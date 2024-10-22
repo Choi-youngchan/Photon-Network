@@ -6,20 +6,31 @@ using UnityEngine;
 public class Rotation : MonoBehaviour
 {
     [SerializeField] float mouseX;
+    [SerializeField] float mouseY;
     [SerializeField] float speed = 200.0f;
     void Start()
     {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
     {
     }
-    public void RotateY()
+    public void InputUpdateY()
     {
         mouseX += Input.GetAxisRaw("Mouse X") * speed * Time.deltaTime;
-
-        transform.eulerAngles = new Vector3(0, mouseX, 0);
     }
+
+    public void RotateY(Rigidbody rigidbody)
+    {
+        rigidbody.transform.eulerAngles = new Vector3(0, mouseX, 0);
+    }
+    public void RotateX()
+    {
+        mouseY = Mathf.Clamp(mouseY, -65, 65);
+
+        mouseY += Input.GetAxisRaw("Mouse Y") * speed * Time.deltaTime;
+
+        transform.localEulerAngles = new Vector3(-mouseY, 0,0);
+    }
+
 }
