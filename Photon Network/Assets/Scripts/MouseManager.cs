@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,14 +6,14 @@ using UnityEngine;
 public class MouseManager : MonoBehaviour
 {
     [SerializeField] Texture2D texture2D;
-    public void SetMouse()
+    public void SetMouse(bool state)
     {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = state;
+        Cursor.lockState = (CursorLockMode)Convert.ToInt32(!state);
         Cursor.SetCursor(texture2D, Vector2.zero, CursorMode.ForceSoftware);
     }
     private void Awake()
     {
-        SetMouse();
+        SetMouse(false);
     }
 }

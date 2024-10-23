@@ -28,10 +28,14 @@ public class Character : MonoBehaviourPunCallbacks
 
     void Update()
     {
+        if (photonView.IsMine == false) return;
+
         rotation.InputUpdateY();
     }
     private void FixedUpdate()
     {
+        if(photonView.IsMine == false) return;
+
         rotation.RotateY(rigidBody);
         move.Movement(rigidBody);
     }
